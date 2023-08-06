@@ -1,0 +1,2 @@
+[proj_aws_terraform_ansible]
+myec2 ansible_host=ec2-ip.us-east-2.compute.amazonaws.com ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/proj_aws_terraform_ansible.pem
