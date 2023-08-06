@@ -1,0 +1,45 @@
+---
+- name: Install Jenkins, Java, and Python
+  hosts: proj_aws_terraform_ansible
+  become: yes
+
+  tasks:
+    - name: Install Java
+      apt:
+        name: openjdk-11-jdk
+        update_cache: yes
+
+    - name: Install Python
+      apt:
+        name: python3
+        state: present
+
+    - name: Update APT Sources
+      apt:
+        update_cache: yes
+
+    - name: Install CA certificate package
+      apt:
+        name: ca-certificates
+        state: present
+
+
+    - name: Download and install Jenkins APT Repository Key
+      shell: "wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -"
+      environment:
+        DEBIAN_FRONTEND: noninteractive
+
+    - name: Add Jenkins APT Repository to sources.list
+      shell: "echo 'deb http://pkg.jenkins.io/debian binary/' | sudo tee /etc/apt/sources.list.d/jenkins.list"
+      environment:
+        DEBIAN_FRONTEND: noninteractive
+
+    
+    - name: Update APT Sources
+      apt:
+        update_cache: yes
+
+    - name: Install Jenkins
+      apt:
+        name: jenkins
+        state: present
