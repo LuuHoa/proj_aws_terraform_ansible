@@ -2,6 +2,7 @@ provider "aws" {
   region     = "us-east-2"
   access_key = ""
   secret_key = ""
+  token = ""
 }
 
 resource "aws_instance" "proj_aws" {
